@@ -4,17 +4,19 @@
    w + h are optional (they just stop the layout jumping
    before an image has loaded).
    ========================================================== */
-const PHOTOS = [
-  { src: "photos/01.jpg"},
-  { src: "photos/02.jpg"},
-  { src: "photos/03.jpg"},
-  { src: "photos/04.jpg"},
-  { src: "photos/05.jpg"},
-  { src: "photos/06.jpg"},
-  { src: "photos/07.jpg"},
-  { src: "photos/08.jpg"},
-  { src: "photos/09.jpg"},
-  { src: "photos/10.jpg"}
+const PHOTO_BASE = "https://storage.georgijs.com/";
+
+   const PHOTOS = [
+  { src: "01.jpg"},
+  { src: "02.jpg"},
+  { src: "03.jpg"},
+  { src: "04.jpg"},
+  { src: "05.jpg"},
+  { src: "06.jpg"},
+  { src: "07.jpg"},
+  { src: "08.jpg"},
+  { src: "09.jpg"},
+  { src: "10.jpg"}
 ];
 
 /* ==========================================================
@@ -49,7 +51,7 @@ const FALLBACK_EMAIL = "hello@georgijs.com";
     fig.dataset.index = i;
 
     const img = document.createElement("img");
-    img.src = photo.src;
+    img.src = PHOTO_BASE + photo.src;
     img.alt = photo.caption || "";
     img.loading = i < 3 ? "eager" : "lazy";
     img.draggable = false;
