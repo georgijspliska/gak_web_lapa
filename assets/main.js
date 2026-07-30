@@ -24,8 +24,7 @@ const PHOTO_BASE = "https://storage.georgijs.com/";
    Pick one service, paste its endpoint below. See README.
      Web3Forms  https://api.web3forms.com/submit          (also set ACCESS_KEY)
    ========================================================== */
-const FORM_ENDPOINT = "https://api.web3forms.com/submit";
-const FORM_ACCESS_KEY = "1f1de842-53e0-4296-b33d-1ccfdc761df8";
+const FORM_ENDPOINT = "/api/contact";
 const FALLBACK_EMAIL = "hello@georgijs.com";
 
 /* ==========================================================
@@ -301,27 +300,20 @@ const FALLBACK_EMAIL = "hello@georgijs.com";
       return;
     }
 
-    if (!FORM_ENDPOINT) {
-      say("No form endpoint set yet — add one in assets/main.js.", "bad");
-      return;
-    }
-
-    const data = new FormData(form);
-    data.delete("_gotcha");
-    data.append("subject", "New message from the website");
-    if (FORM_ACCESS_KEY) data.append("access_key", FORM_ACCESS_KEY);
-
     btn.disabled = true;
-    say("Sending…");
+    say("Sending\u2026");
 
     try {
       const res = await fetch(FORM_ENDPOINT, {
         method: "POST",
         headers: { Accept: "application/json" },
-        body: data
+        body: new FormData(form)
       });
-      if (!res.ok) throw new Error(res.status);
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok || !out.ok) throw new Error(out.error || res.status);
+
       form.reset();
+      if (window.turnstile) window.turnstile.reset();
       say("Message sent. You'll get a reply within a couple of days.", "ok");
     } catch (_) {
       say("That didn't send. Write to " + FALLBACK_EMAIL + " instead.", "bad");
