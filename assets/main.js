@@ -7,16 +7,16 @@
 const PHOTO_BASE = "https://storage.georgijs.com/";
 
    const PHOTOS = [
-  { src: "01.jpg"},
-  { src: "02.jpg"},
-  { src: "03.jpg"},
-  { src: "04.jpg"},
-  { src: "05.jpg"},
-  { src: "06.jpg"},
-  { src: "07.jpg"},
-  { src: "08.jpg"},
-  { src: "09.jpg"},
-  { src: "10.jpg"}
+  { src: "01.jpg", w: 1600, h: 1067},
+  { src: "02.jpg", w: 1600, h: 1067},
+  { src: "03.jpg", w: 1600, h: 1067},
+  { src: "04.jpg", w: 1600, h: 1067},
+  { src: "05.jpg", w: 1600, h: 1067},
+  { src: "06.jpg", w: 1600, h: 1067},
+  { src: "07.jpg", w: 1600, h: 1067},
+  { src: "08.jpg", w: 1600, h: 1067},
+  { src: "09.jpg", w: 1600, h: 1067},
+  { src: "10.jpg", w: 1600, h: 1067}
 ];
 
 /* ==========================================================
@@ -250,7 +250,7 @@ const FALLBACK_EMAIL = "hello@georgijs.com";
 
   window.openViewer = function (photo) {
     if (!photo) return;
-    img.src = photo.src;
+    img.src = PHOTO_BASE + photo.src;
     img.alt = photo.caption || "";
     cap.textContent = photo.caption || "";
     lastFocus = document.activeElement;
