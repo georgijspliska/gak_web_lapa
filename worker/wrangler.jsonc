@@ -16,7 +16,8 @@
   // Same origin as the site => no CORS, no preflight.
   // Workers routes take precedence over Pages for matching paths.
   "routes": [
-    { "pattern": "georgijs.com/api/contact", "zone_name": "georgijs.com" }
+    { "pattern": "georgijs.com/api/*", "zone_name": "georgijs.com" },
+    { "pattern": "www.georgijs.com/api/*", "zone_name": "georgijs.com" }
   ],
 
   "observability": { "enabled": true }
