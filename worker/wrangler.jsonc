@@ -1,0 +1,23 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "contact-form",
+  "main": "src/index.js",
+  "compatibility_date": "2026-07-01",
+
+  // Pinning destination_address means this binding can only ever mail
+  // you. Even if someone finds the endpoint, it can't be repointed.
+  "send_email": [
+    {
+      "name": "EMAIL",
+      "destination_address": "georgijspliska@gmail.com"
+    }
+  ],
+
+  // Same origin as the site => no CORS, no preflight.
+  // Workers routes take precedence over Pages for matching paths.
+  "routes": [
+    { "pattern": "georgijs.com/api/contact", "zone_name": "georgijs.com" }
+  ],
+
+  "observability": { "enabled": true }
+}
