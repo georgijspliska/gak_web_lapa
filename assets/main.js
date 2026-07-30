@@ -24,7 +24,8 @@ const PHOTO_BASE = "https://storage.georgijs.com/";
    Pick one service, paste its endpoint below. See README.
      Web3Forms  https://api.web3forms.com/submit          (also set ACCESS_KEY)
    ========================================================== */
-const FORM_ENDPOINT = "/api/contact";
+const FORM_ENDPOINT = "https://api.web3forms.com/submit";
+const FORM_ACCESS_KEY = "1f1de842-53e0-4296-b33d-1ccfdc761df8";
 const FALLBACK_EMAIL = "hello@georgijs.com";
 
 /* ==========================================================
