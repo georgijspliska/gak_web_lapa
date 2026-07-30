@@ -301,20 +301,27 @@ const FALLBACK_EMAIL = "hello@georgijs.com";
       return;
     }
 
+    if (!FORM_ENDPOINT) {
+      say("No form endpoint set yet — add one in assets/main.js.", "bad");
+      return;
+    }
+
+    const data = new FormData(form);
+    data.delete("_gotcha");
+    data.append("subject", "New message from the website");
+    if (FORM_ACCESS_KEY) data.append("access_key", FORM_ACCESS_KEY);
+
     btn.disabled = true;
-    say("Sending\u2026");
+    say("Sending…");
 
     try {
       const res = await fetch(FORM_ENDPOINT, {
         method: "POST",
         headers: { Accept: "application/json" },
-        body: new FormData(form)
+        body: data
       });
-      const out = await res.json().catch(() => ({}));
-      if (!res.ok || !out.ok) throw new Error(out.error || res.status);
-
+      if (!res.ok) throw new Error(res.status);
       form.reset();
-      if (window.turnstile) window.turnstile.reset();
       say("Message sent. You'll get a reply within a couple of days.", "ok");
     } catch (_) {
       say("That didn't send. Write to " + FALLBACK_EMAIL + " instead.", "bad");
